@@ -4,7 +4,6 @@ import { ItemStyled } from './ConactItemStyled';
 
 const ContactItem = function ({ contact }) {
   const dispatch = useDispatch();
-
   const HandleDelete = id => dispatch(deleteContact(id));
 
   return (
