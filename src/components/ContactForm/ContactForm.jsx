@@ -1,6 +1,8 @@
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import 'yup-phone';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 import {
   FormPlateStyled,
   Label,
@@ -15,15 +17,20 @@ const schema = yup.object().shape({
 });
 
 const ContactForm = function () {
+  const dispatch = useDispatch();
+  const handleSubmit = values => {
+    dispatch(addContact(values));
+  };
+
   return (
     <FormPlateStyled>
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={schema}
-        // onSubmit={(values, { resetForm }) => {
-        //   handleSubmit(values);
-        //   resetForm();
-        // }}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values);
+          resetForm();
+        }}
       >
         <Form>
           <Label>

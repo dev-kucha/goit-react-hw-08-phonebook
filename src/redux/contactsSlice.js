@@ -14,9 +14,19 @@ const contactsSlice = createSlice({
   reducers: {
     addContact: {
       reducer(state, action) {
-        state.push(action.payload);
+        const isIncludes = newName => {
+          return state.find(
+            contact =>
+              contact.name.toLocaleLowerCase() === newName.toLocaleLowerCase()
+          )
+            ? true
+            : false;
+        };
+        !isIncludes(action.payload.name)
+          ? state.push(action.payload)
+          : alert(`${action.payload.name} is already in contacts`);
       },
-      prepare(name, number) {
+      prepare({ name, number }) {
         return {
           payload: {
             id: nanoid(),
@@ -26,9 +36,15 @@ const contactsSlice = createSlice({
         };
       },
     },
+
+    deleteContact(state, action) {
+      const index = state.findIndex(contact => contact.id === action.payload);
+      state.splice(index, 1);
+    },
+
     // Код остальных редюсеров
   },
 });
 
-export const { addContact } = contactsSlice.actions;
+export const { addContact, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
