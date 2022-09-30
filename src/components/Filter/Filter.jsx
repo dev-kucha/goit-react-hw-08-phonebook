@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { newFilter } from 'redux/filterSlice';
+import { selectFilterText } from 'redux/selectors';
 import { FilterPlateStyled, Input } from './FilterStyled';
 
 const Filter = function () {
-  const filter = useSelector(state => state.filter.text);
+  const filter = useSelector(selectFilterText);
   const dispatch = useDispatch();
   const handleFilter = searchQuery => dispatch(newFilter(searchQuery));
 

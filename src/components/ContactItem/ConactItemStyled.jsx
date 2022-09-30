@@ -10,3 +10,10 @@ export const ItemStyled = styled.div`
   padding-right: 16px;
   background-color: lightgrey;
 `;
+
+export const ContactStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 16px;
+`;
