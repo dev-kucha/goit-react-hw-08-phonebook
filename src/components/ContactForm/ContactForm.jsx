@@ -1,8 +1,8 @@
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import 'yup-phone';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+// import { useDispatch } from 'react-redux';
+// import { addContact } from 'redux/operations';
 import {
   FormPlateStyled,
   Label,
@@ -17,9 +17,9 @@ const schema = yup.object().shape({
 });
 
 const ContactForm = function () {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleSubmit = values => {
-    dispatch(addContact(values));
+    // dispatch(addContact(values));
   };
 
   return (

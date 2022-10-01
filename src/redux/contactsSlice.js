@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { nanoid } from '@reduxjs/toolkit';
-import { fetchContacts } from './operations';
+import { fetchContacts, deleteContact } from './operations';
 
 const contactsInitialState = [
   { id: 'id-1', name: 'Rosie Simpson', number: '+38044-459-12-56' },
@@ -8,6 +8,15 @@ const contactsInitialState = [
   { id: 'id-3', name: 'Eden Clements', number: '+38066-645-17-79' },
   { id: 'id-4', name: 'Annie Copeland', number: '+38077-227-91-26' },
 ];
+
+const handlePending = state => {
+  state.isLoading = true;
+};
+
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -50,21 +59,23 @@ const contactsSlice = createSlice({
     // Код остальных редюсеров
   },
   extraReducers: {
-    [fetchContacts.pending](state) {
-      state.isLoading = true;
-    },
+    [fetchContacts.pending]: handlePending,
     [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.items = action.payload;
     },
-    [fetchContacts.rejected](state, action) {
+    [fetchContacts.rejected]: handleRejected,
+    [deleteContact.pending]: handlePending,
+    [deleteContact.fulfilled](state, action) {
       state.isLoading = false;
-      state.error = action.payload;
-      // console.log(action.payload);
+      state.error = null;
+      const index = state.items.findIndex(task => task.id === action.payload);
+      state.items.splice(index, 1);
     },
+    [deleteContact.rejected]: handleRejected,
   },
 });
 
-export const { addContact, deleteContact } = contactsSlice.actions;
+// export const { addContact, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
