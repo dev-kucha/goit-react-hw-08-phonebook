@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { nanoid } from '@reduxjs/toolkit';
-import { fetchContacts, deleteContact } from './operations';
+import { fetchContacts, deleteContact, addContact } from './operations';
 
 const contactsInitialState = [
   { id: 'id-1', name: 'Rosie Simpson', number: '+38044-459-12-56' },
@@ -26,37 +26,7 @@ const contactsSlice = createSlice({
     error: null,
   },
   reducers: {
-    // addContact: {
-    //   reducer(state, action) {
-    //     const isIncludes = newName => {
-    //       return state.find(
-    //         contact =>
-    //           contact.name.toLocaleLowerCase() === newName.toLocaleLowerCase()
-    //       )
-    //         ? true
-    //         : false;
-    //     };
-    //     !isIncludes(action.payload.name)
-    //       ? state.push(action.payload)
-    //       : alert(`${action.payload.name} is already in contacts`);
-    //   },
-    //   prepare({ name, number }) {
-    //     return {
-    //       payload: {
-    //         id: nanoid(),
-    //         name,
-    //         number,
-    //       },
-    //     };
-    //   },
-    // },
-    // fetchContact() {},
-    // addContact() {},
-    // deleteContact(state, action) {
-    //   const index = state.findIndex(contact => contact.id === action.payload);
-    //   state.splice(index, 1);
-    // },
-    // Код остальных редюсеров
+    //
   },
   extraReducers: {
     [fetchContacts.pending]: handlePending,
@@ -66,11 +36,25 @@ const contactsSlice = createSlice({
       state.items = action.payload;
     },
     [fetchContacts.rejected]: handleRejected,
+
+    [addContact.pending]: handlePending,
+    [addContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+
+      console.log(action.payload);
+    },
+    [addContact.rejected]: handleRejected,
+
     [deleteContact.pending]: handlePending,
     [deleteContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.items.findIndex(task => task.id === action.payload);
+      console.log(action.payload);
+      const index = state.items.findIndex(
+        contact => contact.id === action.payload
+      );
       state.items.splice(index, 1);
     },
     [deleteContact.rejected]: handleRejected,
