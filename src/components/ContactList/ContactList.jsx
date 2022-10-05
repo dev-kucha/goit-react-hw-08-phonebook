@@ -6,7 +6,6 @@ import { ListSlyled } from './ContactListStyled';
 const ContactList = function () {
   const contacts = useSelector(selectContacts);
   const filterText = useSelector(selectFilterText);
-
   return (
     <ListSlyled>
       {contacts
