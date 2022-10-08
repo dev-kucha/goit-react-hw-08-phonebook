@@ -9,7 +9,7 @@ const ContactItem = function ({ contact }) {
   return (
     <ItemStyled>
       <ContactStyled>
-        <span>{contact.name}:</span> <span>{contact.phone}</span>
+        <span>{contact.name}:</span> <span>{contact.number}</span>
       </ContactStyled>
       <button
         type="button"
