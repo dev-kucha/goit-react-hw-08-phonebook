@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import css from './RegisterForm.module.css';
-// import { FormStyled, Label } from './RegisterFormStyled';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();

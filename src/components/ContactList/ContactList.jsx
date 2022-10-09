@@ -1,11 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ContactItem from 'components/ContactItem/ContactItem';
 import { selectContacts, selectFilterText } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 import { ListSlyled } from './ContactListStyled';
 
 const ContactList = function () {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filterText = useSelector(selectFilterText);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <ListSlyled>
       {contacts
