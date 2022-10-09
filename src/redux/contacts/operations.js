@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -28,7 +29,8 @@ export const addContact = createAsyncThunk(
     const stateContacts = thunkAPI.getState().contacts.items;
 
     if (isIncludes(name, stateContacts)) {
-      alert(`${name} is already in contacts`);
+      // alert(`${name} is already in contacts`);
+      toast.error(`${name} is already in contacts`);
       return thunkAPI.rejectWithValue(`${name} is already in contacts`);
     }
 

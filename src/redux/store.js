@@ -15,13 +15,6 @@ import { contactsReducer } from './contacts/contactsSlice';
 import { filterReducer } from './filter/filterSlice';
 import { authReducer } from './auth/slice';
 
-// const rootPersistConfig = {
-//   key: 'root',
-//   storage: storage,
-//   blacklist: ['filter'],
-// };
-
-// const rootPersistReducer = persistReducer(rootPersistConfig, rootReducer);
 const authPersistConfig = {
   key: 'auth',
   storage,
@@ -44,5 +37,4 @@ export const store = configureStore({
     }),
 });
 
-// export default persistReducer(rootPersistConfig, rootReducer);
 export const persistor = persistStore(store);
