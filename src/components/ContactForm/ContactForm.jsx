@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 // import 'yup-phone';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 import {
   FormPlateStyled,
   Label,

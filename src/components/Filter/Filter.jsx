@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { newFilter } from 'redux/filterSlice';
-import { selectFilterText } from 'redux/selectors';
+import { newFilter } from 'redux/filter/filterSlice';
+import { selectFilterText } from 'redux/contacts/selectors';
 import { FilterPlateStyled, Input } from './FilterStyled';
 
 const Filter = function () {
